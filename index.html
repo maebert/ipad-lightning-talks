@@ -1,0 +1,298 @@
+<html>
+<head>
+<style>
+body {
+	background: black;
+	margin: 0px;
+}
+
+#container {
+	width: 1024px;
+	height: 768;
+	background: white;
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a3a3a3), color-stop(80%,#4f4f4f), color-stop(90%,#424242), color-stop(90%,#303030), color-stop(100%,#545454)); 
+	-webkit-border-radius: 8px;
+	position: relative;
+}
+
+#upper {
+	height: 80%;
+	margin: 0px;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#686868), color-stop(3%,#7f7f7f), color-stop(97%,#262626), color-stop(100%,#0e0e0e)); /* Chrome,Safari4+ */
+		-webkit-border-radius: 16px;
+	background-color: green;
+}
+
+#current, #time, #nextlabel, #next {
+	font-family: Helvetica, Arial;
+	font-size: 100pt;
+	text-align: center;
+	padding-top: 40px;
+	font-weight: bold;
+	color: #aaa;
+	margin: 0px;
+	text-shadow: 0px 2px 1px #eee, 0px -2px 0px #555;
+}
+#current {
+	color: #bbb;
+	-webkit-mask-image: -webkit-linear-gradient(top, rgba(0,0,0,1), rgba(0,0,0,.6) 60%, rgba(0,0,0,.7) 60%, rgba(0,0,0,.7));
+
+}
+
+#time {
+    	text-shadow: 0px 5px 0px #ddd, 0px -5px 0px #333;
+		font-size: 300pt;
+		padding-top: 0px;
+		margin-top: -60px;
+		letter-spacing: -15px;
+		-webkit-mask-image: -webkit-linear-gradient(top, rgba(0,0,0,1), rgba(0,0,0,.3) 50%, rgba(0,0,0,.2) 50%, rgba(0,0,0,.7));
+		-webkit-transition: color .2s linear;
+}
+#time.alert {
+	color: #D63E3E;
+}
+
+#nextlabel {
+		font-size: 30pt;
+		padding-top: 10px;
+		color: #666;
+		text-shadow: 0px 2px 1px #aaa, 0px -2px 0px #222;
+		text-indent: -500px;
+}
+#next {
+		font-size: 70pt;
+		margin-top: -75px;
+		color: #888;
+		text-shadow: 0px 2px 1px #aaa, 0px -2px 0px #222;
+
+-webkit-mask-image: -webkit-linear-gradient(top, rgba(0,0,0,1), rgba(0,0,0,.7) 62%, rgba(0,0,0,.5) 62%, rgba(0,0,0,.7));
+}
+
+#lower.alert {
+	background-color: rgba(120,250,120,.4);
+
+}
+
+#lower {
+	height: 30%;
+	margin: 0px;
+	-webkit-transition: background-color .2s linear;
+}
+.button {
+  width: 100px;
+  height: 100px;  
+  border-bottom: 2px solid #eee;
+  background-image: -webkit-linear-gradient(top, #777, #aaa 80% );
+  -webkit-border-radius: 100px;  
+  box-shadow: inset rgba(0,0,0,0.2) 0px 5px 6px, 0px -2px 1px rgba(0,0,0,0.2) ;
+  opacity: .5;
+}
+#button_next {
+  bottom: 27px;
+  right: 27px;
+  position: absolute;
+}
+#button_edit {
+  bottom: 27px;
+  left: 27px;
+  position: absolute;
+}
+.button span {
+  position: absolute;
+  width: 80px;
+  height: 52px;
+  left: 10px;
+  top: 10px;
+  cursor: pointer;
+  font-family: "Lucida Sans";
+  font-weight: bold;
+  font-size: 60px;
+  color: #666;
+  text-shadow: 0px 1px 0px #fff;
+  text-align: center;
+  line-height: 17px;
+  padding-top: 28px;
+
+  -webkit-border-radius: 100px;  
+
+  background-image: -webkit-linear-gradient(top, #bbb, #888 70%, #666 100% );
+  
+  background-position: 0 6px;
+  background-color: #bbb;
+  background-repeat: no-repeat;
+
+  box-shadow: rgba(0,0,0,.4) 0 3px 6px;
+  
+}
+
+
+#edit {
+	position: absolute;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#686868), color-stop(3%,#7f7f7f), color-stop(97%,#262626), color-stop(100%,#0e0e0e));
+	height: 100%;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	z-index: 99;
+	-webkit-transition: top .5s ease-in;
+}
+#edit textarea {
+	margin: 50px;
+	width: 934px;	
+	height: 374px;
+	padding: 20px;
+	font-size: 40px;
+	background-image: -webkit-linear-gradient(top, #bbb, #888 70%, #666 100% );
+	border: 1px solid #555;
+	outline: none;
+	-webkit-border-radius: 16px;
+	text-shadow: 0px 1px 0px white;
+	color: #333;
+	box-shadow: inset 0px 10px 10px rgba(0,0,0,.3), 0px 2px 1px #aaa;
+}
+
+#edit input[type=button] {
+	font-family: "Lucida Sans";
+  font-weight: bold;
+  font-size: 60px;
+  color: #666;
+  text-shadow: 0px 1px 0px #fff;
+  text-align: center;
+  line-height: 17px;
+  padding-top: 10px;
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  height: 110px;
+  width: 976px;
+  -webkit-border-radius: 100px;  
+
+  background-image: -webkit-linear-gradient(top, #bbb, #888 70%, #666 100% );
+}
+
+#edit label {
+	color: #888;
+	font-weight: bold;
+	text-shadow: 0px 1px 0px #ccc;
+height: 60px;
+margin-left: 50px;
+	font-size: 40px;
+	font-family: Helvetica, Arial;
+}
+
+#edit input[type=text] {
+	width: 160px;	
+	height: 60px;
+	padding: 20px;
+	vertical-align: top;
+	font-size: 40px;
+		font-size: 40px;
+	background-image: -webkit-linear-gradient(top, #bbb, #888 70%, #666 100% );
+	border: 1px solid #555;
+	outline: none;
+	-webkit-border-radius: 16px;
+	text-shadow: 0px 1px 0px white;
+	color: #333;
+	box-shadow: inset 0px 10px 10px rgba(0,0,0,.3), 0px 2px 1px #aaa;
+}
+
+#edit.hidden {
+	top: -800px;
+}
+
+</style>
+<script language="javascript">
+
+var time = 15;
+var alert_speaker = 5;
+var alert_next = 10;
+
+var speakers = []
+var current = -1;
+var start_time = 0
+
+function next() {
+	console.log(speakers);
+	current++;
+	document.getElementById("current").innerHTML = speakers[current];
+	if (current < speakers.length-1) document.getElementById("next").innerHTML = speakers[current+1];
+	else document.getElementById("next").innerHTML = "Coffee Break!"
+	start_time = (new Date()).getTime();
+	go();
+}
+
+function go() {
+	start_time = (new Date()).getTime();
+	unflash();
+	document.getElementById("time").innerHTML = "GO!";
+	setTimeout(update, 1000);
+}
+
+function update() {
+	var l = time - Math.floor(((new Date()).getTime() - start_time) / 1000);
+	var min = Math.floor(l / 60);
+	var sec = l % 60;
+	if (sec<10) sec = "0"+sec;
+	if (time > 600 && min<10) min = "0"+min;
+	document.getElementById("time").innerHTML = min+":"+sec;
+	if (l <= alert_next && l > alert_speaker) flash_next();
+	if (l <= alert_speaker && l > 0) flash();	
+	if (l > 0) setTimeout(update, 1000);
+	else document.getElementById("time").className = "alert"
+}
+
+function edit() {
+	document.getElementById("edit").className = ""	
+}
+
+function close_edit() {
+	speakers = document.getElementById("speakers").value.split(",");
+	console.log(speakers);
+	time = parseInt(document.getElementById("config_time").value);
+	alert_speaker = parseInt(document.getElementById("config_timeout").value);
+	alert_next = alert_speaker*2;
+	if (current < speakers.length-1) document.getElementById("next").innerHTML = speakers[current+1];
+	document.getElementById("edit").className = "hidden"	
+}
+
+function flash() {
+	document.getElementById("time").className = "alert";
+	setTimeout(unflash, 500)
+}
+function flash_next() {
+	document.getElementById("lower").className = "alert";
+	setTimeout(unflash_next, 500)
+}
+function unflash() {
+	document.getElementById("time").className = "";
+}
+function unflash_next() {
+	document.getElementById("lower").className = "";
+}
+</script>
+
+</head>
+<body>
+
+	<div id="container">
+		<div id="edit">
+			<label for="speakers">&nbsp;</label>
+			<textarea id="speakers" name="speakers">Arnold, Berta, Cesar</textarea>
+			<label for="config_time">Time (sec): </label><input type="text" id="config_time" name="config_time" value="300" />
+			<label for="config_timeout">Timeout (sec): </label><input type="text" id="config_timeout" name="config_timeout" value="10" />
+			<input type="button" value="Done" onclick="close_edit();" />
+		</div>
+		<div id="upper">
+			<p id="current">&nbsp;</p>
+			<p id="time">0:00</p>
+		</div>
+		<div id="lower">
+			<p id="nextlabel">Next:</p>
+			<p id="next"></p>
+			<div class="button" id="button_next" onclick="next();"><span>&raquo;</span></div>
+			<div class="button" id="button_edit" onclick="edit();"><span>E</span></div>
+		</div>
+	</div>
+
+</body>
+</html>
